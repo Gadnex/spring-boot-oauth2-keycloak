@@ -1,0 +1,12 @@
+services:
+  authorisation-server:
+    image: jboss/keycloak
+    container_name: keycloak
+    ports:
+      - 9090:8080
+    environment:
+      - KEYCLOAK_USER=keycloak
+      - KEYCLOAK_PASSWORD=keycloak
+      - KEYCLOAK_IMPORT=/export/demo-realm.json
+    volumes:
+      - ./authorisation-server:/export
