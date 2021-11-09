@@ -86,7 +86,7 @@ public class EmployeeController {
             content = @Content
         )
     })
-    public Optional<Employee> getEmployee(
+    public Employee getEmployee(
         @PathVariable
         @Parameter(
             description = "The unique ID of the employee",
@@ -98,7 +98,7 @@ public class EmployeeController {
         if (employee.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The employeeId is invalid");
         }
-        return employee;
+        return employee.get();
     }
 
     @GetMapping(path = "{employeeId}/all")
@@ -124,7 +124,7 @@ public class EmployeeController {
             content = @Content
         )
     })
-    public Optional<Employee> getEmployeeAllDetails(
+    public Employee getEmployeeAllDetails(
         @PathVariable
         @Parameter(
             description = "The unique ID of the employee",
