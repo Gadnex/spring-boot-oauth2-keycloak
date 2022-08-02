@@ -26,9 +26,10 @@ management:
     endpoint:
         health:
             show-details: always
+    info.env.enabled: true
 
 info:
-    app:
+    application:
         name: @project.name@
         description: @project.description@
         version: @project.version@
