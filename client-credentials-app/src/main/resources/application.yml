@@ -1,0 +1,51 @@
+server:
+    port: 8081
+
+keycloak:
+    base-url: http://localhost:9090/auth
+    realm: demo
+    realm-url: ${keycloak.base-url}/realms/${keycloak.realm}
+
+spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    demo:
+                        authorization-grant-type: client_credentials
+                        client-id: client-credentials-app
+                        client-secret: hWjyvMvF2ISIBl5Fl1JkUsSO9E6Cq3U8
+                        scope: openid,profile
+                provider:
+                    demo:
+                        issuer-uri: ${keycloak.realm-url}
+                        # token-uri: ${keycloak.realm-url}/protocol/openid-connect/token
+
+application:
+    employee-service.url: http://localhost:8080
+
+logging:
+    level: 
+        org.springframework: ERROR
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    endpoint:
+        health:
+            show-details: always
+    info.env.enabled: true
+
+info:
+    app:
+        name: @project.name@
+        description: @project.description@
+        version: @project.version@
+        developer:
+            name: @project.developers[0].name@
+            email: @project.developers[0].email@
+        license:
+            name: @project.licenses[0].name@
+            url: @project.licenses[0].url@
