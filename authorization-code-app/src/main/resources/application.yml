@@ -1,0 +1,52 @@
+server:
+    port: 8082
+
+keycloak:
+    base-url: http://localhost:9090/auth
+    realm: demo
+    realm-url: ${keycloak.base-url}/realms/${keycloak.realm}
+
+spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    demo:
+                        authorization-grant-type: authorization_code
+                        client-name: Authorization Code App
+                        client-id: authorization-code-app
+                        client-secret: 1knrNmQh3UMUApY1Tndua7Lr7vGUo1AR
+                        scope: openid,profile
+                provider:
+                    demo:
+                        issuer-uri: ${keycloak.realm-url}
+                        user-name-attribute: preferred_username
+
+application:
+    employee-service.url: http://localhost:8080
+
+logging:
+    level: 
+        org.springframework: ERROR
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    endpoint:
+        health:
+            show-details: always
+    info.env.enabled: true
+
+info:
+    app:
+        name: @project.name@
+        description: @project.description@
+        version: @project.version@
+        developer:
+            name: @project.developers[0].name@
+            email: @project.developers[0].email@
+        license:
+            name: @project.licenses[0].name@
+            url: @project.licenses[0].url@
