@@ -1,12 +1,12 @@
 services:
   authorisation-server:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak
+    command: ["start-dev", "--import-realm"]
     container_name: keycloak
     ports:
       - 9090:8080
     environment:
-      - KEYCLOAK_USER=keycloak
-      - KEYCLOAK_PASSWORD=keycloak
-      - KEYCLOAK_IMPORT=/export/demo-realm.json
+      - KEYCLOAK_ADMIN=keycloak
+      - KEYCLOAK_ADMIN_PASSWORD=keycloak
     volumes:
-      - ./authorisation-server:/export
+      - ./authorisation-server:/opt/keycloak/data/import

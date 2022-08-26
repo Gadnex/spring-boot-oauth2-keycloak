@@ -2,7 +2,7 @@ server:
     port: 8081
 
 keycloak:
-    base-url: http://localhost:9090/auth
+    base-url: http://localhost:9090
     realm: demo
     realm-url: ${keycloak.base-url}/realms/${keycloak.realm}
 
@@ -14,7 +14,7 @@ spring:
                     demo:
                         authorization-grant-type: client_credentials
                         client-id: client-credentials-app
-                        client-secret: hWjyvMvF2ISIBl5Fl1JkUsSO9E6Cq3U8
+                        client-secret: zk0OAPz4PPKR18SlSF0P5lMT7iCgQitS
                         scope: openid,profile
                 provider:
                     demo:

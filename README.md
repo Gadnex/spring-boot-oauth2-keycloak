@@ -21,19 +21,23 @@ docker-compose up -d
 ```
 This will start up a Keycloak server inside a Docker container. The file `./authorisation-server/demo-realm.json` will then be used to create a `demo` realm in Keycloak. The `demo` realm will also be configured with some default roles, users and OAuth clients required for the application.
 
-If you make changes inside Keycloak that you need to export, you can do the following.
-1) Make sure the Keycloak server is running.
-2) Run the following command:
-```
-docker exec -it keycloak /opt/jboss/keycloak/bin/standalone.sh -Djboss.socket.binding.port-offset=100 -Dkeycloak.migration.action=export -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.realmName=demo -Dkeycloak.migration.usersExportStrategy=REALM_FILE -Dkeycloak.migration.file=/export/demo-realm.json
-```
-This command will start up a second Keycloak instance inside the same Docker container with a port offset of 100 to prevent port conflicts. The second server will export the demo realm to the JSON file inside the container that is mapped to the Docker host via a Docker volume. The file `./authorisation-server/demo-realm.json` will thus be updated.
-
 If you need to log into the Keycloak server admin interface use the following details.
 
-URL: http://localhost:9090/auth/admin/  
-Username: keycloak  
-Password: keycloak
+**URL:** http://localhost:9090/auth/admin/  
+**Username:** keycloak  
+**Password:** keycloak
+
+If you make changes inside Keycloak that you need to export, you can do the following.
+1) Make sure the Keycloak server Docker container is running.
+2) Get a terminal inside the Docker container:
+```
+docker exec -it keycloak bash
+```
+3) Run the following command:
+```
+/opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/import --realm demo --users realm_file
+```
+These instructions will export the Keycloak demo realm to the file `./authorisation-server/demo-realm.json`.
 
 ### resource-server
 Next the resource-server Spring Boot application needs to be started to expose the REST API and the Swagger UI.
