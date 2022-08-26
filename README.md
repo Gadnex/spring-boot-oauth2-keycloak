@@ -23,7 +23,7 @@ This will start up a Keycloak server inside a Docker container. The file `./auth
 
 If you need to log into the Keycloak server admin interface use the following details.
 
-**URL:** http://localhost:9090/auth/admin/  
+**URL:** http://localhost:9090/admin/  
 **Username:** keycloak  
 **Password:** keycloak
 
